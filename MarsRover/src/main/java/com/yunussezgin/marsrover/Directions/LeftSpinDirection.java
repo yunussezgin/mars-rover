@@ -5,10 +5,16 @@
  */
 package com.yunussezgin.marsrover.Directions;
 
+import com.yunussezgin.marsrover.Rover;
+
 /**
  *
  * @author YUNUS
  */
-public interface LeftSpinDirection {
-    
+public class LeftSpinDirection implements Direction {
+
+    @Override
+    public void move(Rover rover) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
 }

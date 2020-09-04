@@ -5,11 +5,13 @@
  */
 package com.yunussezgin.marsrover.Directions;
 
+import com.yunussezgin.marsrover.Rover;
+
 /**
  *
  * @author YUNUS
  */
 public interface Direction {
     
-    public void move();
+    public void move(Rover rover);
 }

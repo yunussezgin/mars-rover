@@ -11,7 +11,7 @@ import com.yunussezgin.marsrover.Rover;
  *
  * @author YUNUS
  */
-public class RightSpinDirection implements Direction {
+public class MoveForwardDirection implements Direction {
 
     @Override
     public void move(Rover rover) {
