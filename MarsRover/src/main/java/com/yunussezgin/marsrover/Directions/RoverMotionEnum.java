@@ -9,18 +9,18 @@ package com.yunussezgin.marsrover.Directions;
  *
  * @author YUNUS
  */
-public enum RoverDirectionlEnum {
-    L(new LeftSpinDirection()),  //LEFT
-    R(new RightSpinDirection()),  //RIGHT
-    M(new MoveForwardDirection()); //MOVE_FORWARD
+public enum RoverMotionEnum {
+    L(new LeftSpinMotion()),  //LEFT
+    R(new RightSpinMotion()),  //RIGHT
+    M(new MoveForwardMotion()); //MOVE_FORWARD
     
-    private Direction direct;
+    private Motion direct;
     
-    RoverDirectionlEnum(Direction direct){
+    RoverMotionEnum(Motion direct){
         this.direct = direct;
     }
     
-    public Direction getDirection(){
+    public Motion getDirection(){
         return this.direct;
     }
 }

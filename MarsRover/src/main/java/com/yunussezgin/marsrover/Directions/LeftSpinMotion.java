@@ -11,7 +11,10 @@ import com.yunussezgin.marsrover.Rover;
  *
  * @author YUNUS
  */
-public interface Direction {
-    
-    public void move(Rover rover);
+public class LeftSpinMotion implements Motion {
+
+    @Override
+    public void move(Rover rover) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
 }
