@@ -28,8 +28,14 @@ public class CompositeController {
          controllerList.remove(controller);
     }
     
-    public void execute(){
-        for(IController controller : controllerList)
-            controller.control();
+    public String execute() {
+        String result = "";
+        for (IController controller : controllerList) {
+            String error = controller.control();
+            if (error != null) {
+                result = result + error + "\n";
+            }
+        }
+        return result;
     }
 }

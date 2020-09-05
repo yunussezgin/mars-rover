@@ -10,5 +10,5 @@ package com.yunussezgin.marsrover.controllers;
  * @author YUNUS
  */
 public interface IController {
-    public void control();
+    public String control();
 }

@@ -5,14 +5,15 @@
  */
 package com.yunussezgin.marsrover;
 
+import com.yunussezgin.marsrover.parser.InputController;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -101,6 +102,13 @@ public class MainForm extends javax.swing.JFrame {
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         System.out.println(inputTextPane.getText());
+        
+        String message = InputController.isValidCommand(inputTextPane.getText());
+        
+        if(message != null && message.length() > 0)
+            JOptionPane.showMessageDialog(null, message);
+        
+        
     }//GEN-LAST:event_startButtonActionPerformed
 
     /**

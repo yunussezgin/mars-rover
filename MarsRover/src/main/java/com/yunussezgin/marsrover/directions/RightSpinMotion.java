@@ -11,6 +11,11 @@ import com.yunussezgin.marsrover.Rover;
  *
  * @author YUNUS
  */
-public interface IMotion {
-    public void move(Rover rover);
+public class RightSpinMotion implements IMotion {
+
+    @Override
+    public void move(Rover rover) {
+        rover.getDirection().rightSpin();
+    }
+
 }

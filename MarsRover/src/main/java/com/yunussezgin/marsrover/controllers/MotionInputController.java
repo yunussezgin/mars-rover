@@ -5,6 +5,10 @@
  */
 package com.yunussezgin.marsrover.controllers;
 
+import com.yunussezgin.marsrover.Util;
+import com.yunussezgin.marsrover.directions.DirectionEnum;
+import com.yunussezgin.marsrover.directions.RoverMotionEnum;
+
 /**
  *
  * @author YUNUS
@@ -13,8 +17,35 @@ public class MotionInputController implements IController {
     private String line;
     
     @Override
-    public void control() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String control() {
+
+        for (int i = 0; i < line.length(); i++) {
+            boolean isValid = false;
+            for (RoverMotionEnum motion : RoverMotionEnum.values()) {
+                if (motion.toString().equals(String.valueOf(line.charAt(i)))) {
+                    isValid = true;
+                    break;
+                }
+            }
+            if (!isValid) {
+                return "Motion string includes invalid character which is " + line.charAt(i);
+            }
+        }
+
+        return null;
     }
     
+     /**
+     * @return the line
+     */
+    public String getLine() {
+        return line;
+    }
+
+    /**
+     * @param line the line to set
+     */
+    public void setLine(String line) {
+        this.line = line.trim();
+    }
 }
