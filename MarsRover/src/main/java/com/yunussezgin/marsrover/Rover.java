@@ -5,8 +5,8 @@
  */
 package com.yunussezgin.marsrover;
 
-import com.yunussezgin.marsrover.Directions.DirectionEnum;
-import com.yunussezgin.marsrover.Directions.Motion;
+import com.yunussezgin.marsrover.directions.DirectionEnum;
+import com.yunussezgin.marsrover.directions.IMotion;
 
 /**
  *
@@ -15,9 +15,9 @@ import com.yunussezgin.marsrover.Directions.Motion;
 public class Rover {
     private Point point;
     private DirectionEnum direction; 
-    private Motion motion;
+    private IMotion motion;
     
-    public Rover(Point point, DirectionEnum direction, Motion motion){
+    public Rover(Point point, DirectionEnum direction, IMotion motion){
         this.point = point;
         this.direction = direction;
         this.motion = motion;
@@ -40,7 +40,7 @@ public class Rover {
     /**
      * @return the motion
      */
-    public Motion getMotion() {
+    public IMotion getMotion() {
         return motion;
     }
     

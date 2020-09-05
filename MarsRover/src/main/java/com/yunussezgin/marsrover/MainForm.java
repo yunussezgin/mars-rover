@@ -5,11 +5,11 @@
  */
 package com.yunussezgin.marsrover;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,6 +25,7 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         try {
+            //BufferedImage img = ImageIO.read(new File(MainForm.class.getClassLoader().getResource("/resources/background.jpg").getPath()));
             BufferedImage img = ImageIO.read(new File("background.jpg"));
             Image dimg = img.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);

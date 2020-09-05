@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.yunussezgin.marsrover.Directions;
-
-import com.yunussezgin.marsrover.Rover;
+package com.yunussezgin.marsrover.controllers;
 
 /**
  *
  * @author YUNUS
  */
-public class LeftSpinMotion implements Motion {
-
+public class RoverPositionController implements IController {
+    private String line;
+    
     @Override
-    public void move(Rover rover) {
+    public void control() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+    }
+    
 }

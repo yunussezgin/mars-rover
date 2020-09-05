@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.yunussezgin.marsrover.Directions;
-
-import com.yunussezgin.marsrover.Rover;
+package com.yunussezgin.marsrover.controllers;
 
 /**
  *
  * @author YUNUS
  */
-public interface Motion {
-    
-    public void move(Rover rover);
+public interface IController {
+    public void control();
 }
