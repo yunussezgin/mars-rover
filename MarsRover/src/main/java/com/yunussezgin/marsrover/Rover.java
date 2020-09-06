@@ -5,7 +5,7 @@
  */
 package com.yunussezgin.marsrover;
 
-import com.yunussezgin.marsrover.directions.DirectionEnum;
+import com.yunussezgin.marsrover.motions.DirectionEnum;
 
 /**
  *

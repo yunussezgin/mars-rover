@@ -5,9 +5,9 @@
  */
 package com.yunussezgin.marsrover;
 
-import com.yunussezgin.marsrover.directions.DirectionEnum;
-import com.yunussezgin.marsrover.directions.IMotion;
-import com.yunussezgin.marsrover.directions.RoverMotionEnum;
+import com.yunussezgin.marsrover.motions.DirectionEnum;
+import com.yunussezgin.marsrover.motions.IMotion;
+import com.yunussezgin.marsrover.motions.RoverMotionEnum;
 import com.yunussezgin.marsrover.parser.InputController;
 import java.awt.FlowLayout;
 import java.awt.Image;

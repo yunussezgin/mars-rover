@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.yunussezgin.marsrover.directions;
+package com.yunussezgin.marsrover.motions;
 
 import com.yunussezgin.marsrover.Rover;
 
@@ -11,11 +11,10 @@ import com.yunussezgin.marsrover.Rover;
  *
  * @author YUNUS
  */
-public class RightSpinMotion implements IMotion {
+public class LeftSpinMotion implements IMotion {
 
     @Override
     public void move(Rover rover) {
-        rover.setDirection(rover.getDirection().getRightSpin());
-    }
-
+        rover.setDirection(rover.getDirection().getLeftSpin());
+    }    
 }
