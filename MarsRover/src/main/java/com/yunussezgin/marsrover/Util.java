@@ -5,6 +5,10 @@
  */
 package com.yunussezgin.marsrover;
 
+
+import com.yunussezgin.marsrover.parser.OutputController;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -19,5 +23,28 @@ public class  Util {
             return false; 
         }
         return pattern.matcher(strNum).matches();
+    }
+    
+    public static String[] trimInput(String[] lines){
+        List<String> trimLines = new ArrayList<>();
+        
+        for(String line : lines) {
+            if(line.trim().length() > 0)
+                trimLines.add(line.trim());
+        }
+        
+        return trimLines.toArray(new String[0]);
+    }
+    
+    public static String generateOutputMessage(List<Rover> roverList, Plateau plateau) {
+        String outputMessage = "";
+        for (Rover rover : roverList) {
+            outputMessage = outputMessage + rover.getPoint().getX() + " " + rover.getPoint().getY() + " " + rover.getDirection().toString();
+            if (!OutputController.isValidCommand(rover, plateau)) {
+                outputMessage = outputMessage + " - " + "Out of Plateau!";
+            }
+            outputMessage = outputMessage + "\n";
+        }
+        return outputMessage;
     }
 }

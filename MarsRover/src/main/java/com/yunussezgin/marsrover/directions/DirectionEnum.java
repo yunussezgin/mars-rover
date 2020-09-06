@@ -10,22 +10,16 @@ package com.yunussezgin.marsrover.directions;
  * @author YUNUS
  */
 public enum DirectionEnum {
-    N(0),
-    E(90),
-    S(180),
-    W(270);
-    
-    private int degree;
-            
-    DirectionEnum(int degree){
-        this.degree = degree;
+    N,
+    E,
+    S,
+    W;
+
+    public DirectionEnum getLeftSpin() {
+        return DirectionEnum.values()[(this.ordinal() == 0 ? 3 : this.ordinal() - 1) % 4];
     }
-    
-    public void leftSpin(){
-        this.degree = (degree == 0 ? 270 : degree - 90);
-    }
-    
-    public void rightSpin(){
-        this.degree = (degree == 270 ? 0 : degree + 90);
+
+    public DirectionEnum getRightSpin() {
+        return DirectionEnum.values()[(this.ordinal() + 1) % 4];
     }
 }

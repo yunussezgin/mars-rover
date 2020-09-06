@@ -5,11 +5,17 @@
  */
 package com.yunussezgin.marsrover;
 
+import com.yunussezgin.marsrover.directions.DirectionEnum;
+import com.yunussezgin.marsrover.directions.IMotion;
+import com.yunussezgin.marsrover.directions.RoverMotionEnum;
 import com.yunussezgin.marsrover.parser.InputController;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -52,9 +58,10 @@ public class MainForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
         startButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jScrollPane1.setViewportView(inputTextPane);
@@ -70,31 +77,46 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("INPUT");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("OUTPUT");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(235, 235, 235))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(353, 353, 353)
-                .addComponent(startButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(221, 221, 221)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(startButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+                .addGap(182, 182, 182)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
                 .addComponent(startButton)
-                .addGap(84, 84, 84))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,12 +124,20 @@ public class MainForm extends javax.swing.JFrame {
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         System.out.println(inputTextPane.getText());
-        
-        String message = InputController.isValidCommand(inputTextPane.getText());
-        
-        if(message != null && message.length() > 0)
-            JOptionPane.showMessageDialog(null, message);
-        
+
+        String inputControlMessage = InputController.isValidCommand(inputTextPane.getText());
+
+        if (inputControlMessage != null && inputControlMessage.length() > 0) {
+            JOptionPane.showMessageDialog(null, inputControlMessage);
+            return;
+        }
+
+        List<Rover> roverList = createRovers();
+        Plateau plateu = createPlateu();
+
+        String outputMessage = Util.generateOutputMessage(roverList, plateu);
+
+        outputTextPane.setText(outputMessage);
         
     }//GEN-LAST:event_startButtonActionPerformed
 
@@ -146,9 +176,38 @@ public class MainForm extends javax.swing.JFrame {
         });
         
     }
+    
+    private List<Rover> createRovers() {
+        List<Rover> roverList = new ArrayList();
+        String[] lines = Util.trimInput(inputTextPane.getText().split("\n"));
+        Rover rover = null;
+        for (int i = 1; i < lines.length; i++) {
+            if (i % 2 == 1) {
+                rover = new Rover();
+                String[] values = lines[i].split(" ");
+                rover.setPoint(new Point(Integer.valueOf(values[0]), Integer.valueOf(values[1])));
+                rover.setDirection(DirectionEnum.valueOf(values[2]));
+            } else {
+                for (char command : lines[i].toCharArray()) {
+                    IMotion motion = RoverMotionEnum.valueOf(String.valueOf(command)).getMotion();
+                    motion.move(rover);
+                }
+                roverList.add(rover);
+            }
+        }
+        return roverList;
+    }
+    
+    private Plateau createPlateu(){
+         String[] lines = Util.trimInput(inputTextPane.getText().split("\n"));
+         String[] values = lines[0].split(" ");
+         return new Plateau(new Point(Integer.valueOf(values[0]), Integer.valueOf(values[1])));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane inputTextPane;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane outputTextPane;

@@ -40,7 +40,7 @@ public class PlateauInputController implements IController {
      * @param line the line to set
      */
     public void setLine(String line) {
-        this.line = line.trim();
+        this.line = line;
     }
     
 }

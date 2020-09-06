@@ -5,6 +5,7 @@
  */
 package com.yunussezgin.marsrover.parser;
 
+import com.yunussezgin.marsrover.Util;
 import com.yunussezgin.marsrover.controllers.CompositeController;
 import com.yunussezgin.marsrover.controllers.MotionInputController;
 import com.yunussezgin.marsrover.controllers.PlateauInputController;
@@ -17,9 +18,7 @@ import com.yunussezgin.marsrover.controllers.RoverPositionController;
 public class InputController {
     
     public static String isValidCommand(String command) {
-        CompositeController controller = new CompositeController();
-
-        String[] lines = command.split("\n");
+        String[] lines = Util.trimInput(command.split("\n"));
         
         if(lines.length < 3)
             return "Command must consist of at least 3 lines.";

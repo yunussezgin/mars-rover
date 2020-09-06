@@ -5,8 +5,6 @@
  */
 package com.yunussezgin.marsrover.controllers;
 
-import com.yunussezgin.marsrover.Util;
-import com.yunussezgin.marsrover.directions.DirectionEnum;
 import com.yunussezgin.marsrover.directions.RoverMotionEnum;
 
 /**
@@ -46,6 +44,6 @@ public class MotionInputController implements IController {
      * @param line the line to set
      */
     public void setLine(String line) {
-        this.line = line.trim();
+        this.line = line;
     }
 }

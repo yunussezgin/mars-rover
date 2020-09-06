@@ -14,13 +14,13 @@ public enum RoverMotionEnum {
     R(new RightSpinMotion()),  //RIGHT
     M(new MoveForwardMotion()); //MOVE_FORWARD
     
-    private final IMotion direct;
+    private final IMotion motion;
     
-    RoverMotionEnum(IMotion direct){
-        this.direct = direct;
+    RoverMotionEnum(IMotion motion){
+        this.motion = motion;
     }
     
-    public IMotion getDirection(){
-        return this.direct;
+    public IMotion getMotion(){
+        return this.motion;
     }
 }

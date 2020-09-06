@@ -15,7 +15,7 @@ public class RightSpinMotion implements IMotion {
 
     @Override
     public void move(Rover rover) {
-        rover.getDirection().rightSpin();
+        rover.setDirection(rover.getDirection().getRightSpin());
     }
 
 }
