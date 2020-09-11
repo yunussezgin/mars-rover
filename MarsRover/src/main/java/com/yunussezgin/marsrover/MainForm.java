@@ -9,7 +9,6 @@ import com.yunussezgin.marsrover.motions.DirectionEnum;
 import com.yunussezgin.marsrover.motions.IMotion;
 import com.yunussezgin.marsrover.motions.RoverMotionEnum;
 import com.yunussezgin.marsrover.parser.InputController;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
